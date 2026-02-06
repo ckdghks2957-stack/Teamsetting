@@ -1,28 +1,24 @@
-# Team Setter Application Blueprint
+# 팀 편성 어플리케이션 (Team Setter) 블루프린트
 
-## Purpose and Capabilities
-This application provides a web-based interface to facilitate team formation. Users can input a list of team members, specify the desired number of teams, and designate specific individuals as team leaders. The application will then randomly distribute the remaining members among the teams, ensuring that the pre-assigned leaders are placed in separate teams if possible, and displaying the resulting team configurations.
+## 목적 및 기능
+이 어플리케이션은 팀 구성을 쉽고 즐겁게 도와주는 웹 기반 인터페이스를 제공합니다. 사용자는 팀원 목록을 입력하고, 원하는 팀 수를 지정하며, 특정 인원을 팀장으로 설정할 수 있습니다. 어플리케이션은 팀장을 각 팀에 우선 배치한 후 남은 팀원들을 무작위로 분배하여 시각적으로 몰입감 있는 결과를 보여줍니다.
 
-## Project Outline
-### Initial Version (Current Implementation)
--   **HTML (`index.html`):**
-    -   Input field for team members (textarea, one name per line).
-    -   Input field for team leaders (textarea, one name per line).
-    -   Input field for the desired number of teams (number input).
-    -   Button to trigger team generation.
-    -   Display area for generated teams.
--   **CSS (`style.css`):**
-    -   Basic styling for form elements and result display.
-    -   Focus on a clean, modern, and responsive design.
--   **JavaScript (`main.js`):**
-    -   Functionality to read inputs from the HTML form.
-    -   Algorithm to randomly shuffle members and assign them to teams.
-    -   Logic to handle pre-set team leaders and ensure their distribution.
-    -   Dynamic rendering of team results in the display area.
+## 프로젝트 개요
+### 시각적 몰입형 디자인 버전 (현재 목표)
+-   **디자인 컨셉:** 활기차고 에너지가 넘치는 '게임 시작' 분위기.
+-   **시각적 요소:**
+    -   **배경:** 생동감 넘치는 그라데이션과 미세한 노이즈 텍스처를 활용한 프리미엄 질감.
+    -   **컴포넌트:** 글래스모피즘(Glassmorphism) 효과를 적용한 카드 레이아웃.
+    -   **그림자:** 다중 레이어 드롭 쉐도우를 사용하여 깊이감(Depth) 형성.
+    -   **인터랙션:** 부드러운 애니메이션과 마이크로 인터랙션을 통한 사용자 경험 강화.
+-   **기술 스택:**
+    -   **HTML5 & CSS3 (Baseline):** 컨테이너 쿼리, `:has()` 선택자, 현대적인 컬러 스페이스(`oklch`) 활용.
+    -   **JavaScript (ES Modules):** 팀 편성 로직 및 동적 UI 렌더링.
+-   **현지화:** 전체 인터페이스 한글화 및 가독성 높은 한국어 타이포그래피 적용.
 
-## Plan for Current Change (Implement Team Setting Logic)
-1.  **Create `blueprint.md`:** (Completed) Document the application's design, features, and the steps for this task.
-2.  **Update `index.html`:** (Completed) Added necessary input fields and display areas.
-3.  **Update `style.css`:** (Completed) Applied modern and responsive styling.
-4.  **Update `main.js`:** (Completed) Implemented the core team generation logic, including handling leaders and random assignment.
-5.  **Test and Verify:** (Completed) Ensured the application functions correctly and looks good in the browser preview.
+## 프로젝트 단계
+1.  **디자인 개편 및 한글화 계획 수립:** (진행 중) 시각적 몰입감을 위한 요소 정의 및 한글화 적용.
+2.  **HTML 구조 고도화:** 입력 섹션과 결과 섹션을 명확히 구분하고 시각적 요소를 위한 마크업 추가.
+3.  **CSS 스타일링 대전환:** 현대적인 CSS 기술을 사용하여 고퀄리티의 UI 구현.
+4.  **JavaScript 로직 개선:** 팀 생성 시 애니메이션 효과 추가 및 한글 데이터 처리 최적화.
+5.  **최종 검토 및 피드백 반영:** 전체적인 디자인 톤앤매너와 사용성 확인.

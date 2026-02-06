@@ -1,36 +1,72 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Team Setter</title>
+  <title>팀 메이커 - 즐거운 팀 편성</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
   <link href='/style.css' rel='stylesheet'>
 </head>
 <body>
+  <div class="bg-texture"></div>
   <div class="container">
-    <h1>Team Setter</h1>
+    <header>
+      <h1>팀 메이커 <span class="badge">v2.0</span></h1>
+      <p class="subtitle">함께할 때 더 즐거운, 완벽한 팀 구성을 시작해보세요!</p>
+    </header>
 
-    <div class="input-section">
-      <label for="members">Team Members (one name per line):</label>
-      <textarea id="members" rows="10" placeholder="Enter team members here..."></textarea>
-    </div>
+    <main>
+      <section class="card settings-card">
+        <div class="card-header">
+          <span class="icon">⚙️</span>
+          <h2>설정</h2>
+        </div>
+        <div class="input-group">
+          <label for="numTeams">원하는 팀 수</label>
+          <div class="number-input-wrapper">
+            <input type="number" id="numTeams" min="1" value="2">
+            <span class="unit">팀</span>
+          </div>
+        </div>
+      </section>
 
-    <div class="input-section">
-      <label for="leaders">Team Leaders (one name per line):</label>
-      <textarea id="leaders" rows="5" placeholder="Enter team leaders here..."></textarea>
-    </div>
+      <section class="card input-card">
+        <div class="card-header">
+          <span class="icon">👥</span>
+          <h2>멤버 입력</h2>
+        </div>
+        
+        <div class="input-grid">
+          <div class="input-section">
+            <label for="members">팀원 목록 <span class="hint">(한 줄에 한 명씩)</span></label>
+            <textarea id="members" placeholder="예: 홍길동&#10;임꺽정&#10;장길산"></textarea>
+          </div>
 
-    <div class="input-section">
-      <label for="numTeams">Number of Teams:</label>
-      <input type="number" id="numTeams" min="1" value="2">
-    </div>
+          <div class="input-section">
+            <label for="leaders">팀장 후보 <span class="hint">(팀당 한 명씩 배정)</span></label>
+            <textarea id="leaders" placeholder="예: 김팀장&#10;이팀장"></textarea>
+          </div>
+        </div>
+      </section>
 
-    <button id="generateTeams">Generate Teams</button>
+      <div class="action-area">
+        <button id="generateTeams" class="btn-primary">
+          <span class="btn-text">팀 편성하기</span>
+          <span class="btn-icon">🚀</span>
+        </button>
+      </div>
 
-    <div id="teamResults" class="team-results">
-      <!-- Team results will be displayed here -->
-    </div>
+      <section id="teamResults" class="results-container">
+        <!-- 팀 편성 결과가 여기에 표시됩니다 -->
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Team Maker. Made with ❤️ for teams everywhere.</p>
+    </footer>
   </div>
-  <script defer type="text/javascript" src="/main.js"></script>
+  <script defer type="module" src="/main.js"></script>
 </body>
 </html>
