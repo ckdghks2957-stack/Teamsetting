@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>앨리스의 팀 메이커 - 동화 같은 팀 편성</title>
+  <title>Wonderland Team Maker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lora:ital,wght@0,400..700;1,400..700&family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link href='/style.css' rel='stylesheet'>
 </head>
@@ -20,34 +20,45 @@
         <h1 class="storybook-title">WONDERLAND</h1>
         <h2 class="storybook-subtitle">TEAM MAKER</h2>
       </div>
-      <p class="intro-text">마법의 카드로 결정되는 당신의 운명적인 팀을 만나보세요.</p>
+      <p class="intro-text">모험가들의 이름을 입력하고, 왕국의 주인을 직접 선택하세요.</p>
     </header>
 
     <main>
       <div class="scroll-container">
+        <!-- Settings Section -->
         <section class="parchment-panel settings-panel">
           <div class="panel-ornament top"></div>
           <div class="panel-content">
-            <label for="numTeams">왕국의 수 (팀 수)</label>
-            <div class="input-wrapper">
-              <input type="number" id="numTeams" min="1" max="4" value="4">
+            <div class="setting-row">
+              <label for="numTeams">왕국의 수 (팀 수)</label>
+              <div class="number-input-container">
+                <input type="number" id="numTeams" min="1" max="4" value="2">
+              </div>
             </div>
           </div>
           <div class="panel-ornament bottom"></div>
         </section>
 
-        <section class="parchment-panel input-panel">
+        <!-- Member Management Section -->
+        <section class="parchment-panel member-panel">
           <div class="panel-ornament top"></div>
           <div class="panel-content">
-            <div class="input-grid">
-              <div class="input-section">
-                <label for="members">모험가 목록 <span class="hint">(참가자)</span></label>
-                <textarea id="members" placeholder="홍길동&#10;심청이&#10;콩쥐"></textarea>
+            <div class="member-input-area">
+              <label>모험가 추가</label>
+              <div class="input-row">
+                <input type="text" id="memberNameInput" placeholder="이름을 입력하세요 (예: 홍길동)" maxlength="10">
+                <button id="addMemberBtn" class="btn-small">추가</button>
               </div>
-              <div class="input-section">
-                <label for="leaders">왕국의 주인 <span class="hint">(팀장)</span></label>
-                <textarea id="leaders" placeholder="앨리스&#10;모자장수"></textarea>
-              </div>
+            </div>
+
+            <div class="member-list-header">
+              <label>참가자 명단 <span class="hint">(이름을 클릭하여 '왕국의 주인'으로 설정/해제 하세요)</span></label>
+              <div class="count-info">총 <span id="totalMemberCount">0</span>명</div>
+            </div>
+            
+            <div id="memberTagContainer" class="tag-container">
+              <!-- Member tags will appear here -->
+              <div class="empty-list-msg">추가된 모험가가 없습니다.</div>
             </div>
           </div>
           <div class="panel-ornament bottom"></div>
@@ -67,7 +78,7 @@
     </main>
 
     <footer>
-      <p>Curiouser and Curiouser!</p>
+      <p>A Whimsical Journey Begins</p>
     </footer>
   </div>
   <script type="module" src="/main.js"></script>
