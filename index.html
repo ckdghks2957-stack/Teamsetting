@@ -3,12 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
+  <title>Team Setter</title>
   <link href='/style.css' rel='stylesheet'>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
+  <div class="container">
+    <h1>Team Setter</h1>
+
+    <div class="input-section">
+      <label for="members">Team Members (one name per line):</label>
+      <textarea id="members" rows="10" placeholder="Enter team members here..."></textarea>
+    </div>
+
+    <div class="input-section">
+      <label for="leaders">Team Leaders (one name per line):</label>
+      <textarea id="leaders" rows="5" placeholder="Enter team leaders here..."></textarea>
+    </div>
+
+    <div class="input-section">
+      <label for="numTeams">Number of Teams:</label>
+      <input type="number" id="numTeams" min="1" value="2">
+    </div>
+
+    <button id="generateTeams">Generate Teams</button>
+
+    <div id="teamResults" class="team-results">
+      <!-- Team results will be displayed here -->
+    </div>
+  </div>
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>
