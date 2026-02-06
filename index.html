@@ -3,70 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>팀 메이커 - 즐거운 팀 편성</title>
+  <title>Team Maker - Neon Edition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link href='/style.css' rel='stylesheet'>
 </head>
 <body>
-  <div class="bg-texture"></div>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="backdrop"></div>
+
   <div class="container">
     <header>
-      <h1>팀 메이커 <span class="badge">v2.0</span></h1>
-      <p class="subtitle">함께할 때 더 즐거운, 완벽한 팀 구성을 시작해보세요!</p>
+      <div class="logo-wrapper">
+        <h1 class="neon-text">TEAM MAKER</h1>
+        <span class="badge">PRO</span>
+      </div>
+      <p class="subtitle">완벽한 팀을 위한 넥스트 레벨 솔루션</p>
     </header>
 
     <main>
-      <section class="card settings-card">
-        <div class="card-header">
+      <section class="glass-panel settings-panel">
+        <div class="panel-header">
           <span class="icon">⚙️</span>
-          <h2>설정</h2>
+          <h2>SETTING</h2>
         </div>
         <div class="input-group">
-          <label for="numTeams">원하는 팀 수</label>
-          <div class="number-input-wrapper">
+          <label for="numTeams">TEAMS</label>
+          <div class="input-wrapper">
             <input type="number" id="numTeams" min="1" value="2">
             <span class="unit">팀</span>
           </div>
         </div>
       </section>
 
-      <section class="card input-card">
-        <div class="card-header">
+      <section class="glass-panel input-panel">
+        <div class="panel-header">
           <span class="icon">👥</span>
-          <h2>멤버 입력</h2>
+          <h2>MEMBERS</h2>
         </div>
         
         <div class="input-grid">
           <div class="input-section">
-            <label for="members">팀원 목록 <span class="hint">(한 줄에 한 명씩)</span></label>
-            <textarea id="members" placeholder="예: 홍길동&#10;임꺽정&#10;장길산"></textarea>
+            <label for="members">PARTICIPANTS <span class="hint">(이름을 한 줄에 하나씩)</span></label>
+            <textarea id="members" placeholder="홍길동&#10;김철수&#10;이영희"></textarea>
           </div>
 
           <div class="input-section">
-            <label for="leaders">팀장 후보 <span class="hint">(팀당 한 명씩 배정)</span></label>
-            <textarea id="leaders" placeholder="예: 김팀장&#10;이팀장"></textarea>
+            <label for="leaders">LEADERS <span class="hint">(팀장 고정)</span></label>
+            <textarea id="leaders" placeholder="김팀장&#10;박팀장"></textarea>
           </div>
         </div>
       </section>
 
       <div class="action-area">
-        <button id="generateTeams" class="btn-primary">
-          <span class="btn-text">팀 편성하기</span>
-          <span class="btn-icon">🚀</span>
+        <button id="generateTeams" class="btn-neon">
+          <span class="btn-content">START GENERATION</span>
+          <div class="btn-glow"></div>
         </button>
       </div>
 
-      <section id="teamResults" class="results-container">
-        <!-- 팀 편성 결과가 여기에 표시됩니다 -->
+      <section id="teamResults" class="results-grid">
+        <!-- Results will appear here -->
       </section>
     </main>
 
     <footer>
-      <p>&copy; 2026 Team Maker. Made with ❤️ for teams everywhere.</p>
+      <p>DESIGNED FOR PERFORMANCE</p>
     </footer>
   </div>
-  <script defer type="module" src="/main.js"></script>
+  <script type="module" src="/main.js"></script>
 </body>
 </html>
