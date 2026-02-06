@@ -1,6 +1,5 @@
 /**
- * Team Maker v2.0 - Neon Edition
- * Core Logic + Visual Effects
+ * Alice's Team Maker v3.0 - Storybook Edition
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,7 +9,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const generateButton = document.getElementById('generateTeams');
   const teamResultsDiv = document.getElementById('teamResults');
 
-  // Shuffle Array (Fisher-Yates)
+  const TEAM_THEMES = [
+    { 
+      name: 'Team Heart', 
+      class: 'team-heart', 
+      icon: '👑❤️', 
+      symbol: '하트 왕국',
+      character: 'Queen of Hearts'
+    },
+    { 
+      name: 'Team Spade', 
+      class: 'team-spade', 
+      icon: '🛡️♠️', 
+      symbol: '스페이드 기사단',
+      character: 'Chess Knight'
+    },
+    { 
+      name: 'Team Diamond', 
+      class: 'team-diamond', 
+      icon: '💎♦️', 
+      symbol: '다이아 광산',
+      character: 'Jewel Miner'
+    },
+    { 
+      name: 'Team Clover', 
+      class: 'team-clover', 
+      icon: '🍄♣️', 
+      symbol: '클로버 숲',
+      character: 'Forest Elf'
+    }
+  ];
+
   function shuffleArray(array) {
     const result = [...array];
     for (let i = result.length - 1; i > 0; i--) {
@@ -20,33 +49,25 @@ document.addEventListener('DOMContentLoaded', () => {
     return result;
   }
 
-  // Trigger Confetti
-  const fireConfetti = () => {
-    const duration = 3000;
-    const end = Date.now() + duration;
+  const fireWonderlandConfetti = () => {
+    const scalar = 2;
+    const heart = confetti.shapeFromText({ text: '❤️', scalar });
+    const diamond = confetti.shapeFromText({ text: '♦️', scalar });
+    const spade = confetti.shapeFromText({ text: '♠️', scalar });
+    const clover = confetti.shapeFromText({ text: '♣️', scalar });
 
-    (function frame() {
-      // launch a few confetti from the left edge
-      confetti({
-        particleCount: 5,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0 },
-        colors: ['#00f3ff', '#ff00ff', '#bc13fe']
-      });
-      // and launch a few from the right edge
-      confetti({
-        particleCount: 5,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1 },
-        colors: ['#00f3ff', '#ff00ff', '#bc13fe']
-      });
+    const defaults = {
+      spread: 360,
+      ticks: 60,
+      gravity: 0.5,
+      decay: 0.94,
+      startVelocity: 30,
+      shapes: [heart, diamond, spade, clover],
+      colors: ['#d42426', '#d4af37', '#2c3e50', '#27ae60']
+    };
 
-      if (Date.now() < end) {
-        requestAnimationFrame(frame);
-      }
-    }());
+    confetti({ ...defaults, particleCount: 40 });
+    confetti({ ...defaults, particleCount: 20, flat: true });
   };
 
   const generateTeams = () => {
@@ -58,109 +79,89 @@ document.addEventListener('DOMContentLoaded', () => {
       .map(name => name.trim())
       .filter(name => name !== '');
     
-    const numTeams = parseInt(numTeamsInput.value, 10);
-
-    if (isNaN(numTeams) || numTeams < 1) {
-      alert('최소 1개 이상의 팀을 만들어야 합니다!');
-      return;
-    }
+    let numTeams = parseInt(numTeamsInput.value, 10);
+    if (isNaN(numTeams) || numTeams < 1) numTeams = 1;
+    if (numTeams > 4) numTeams = 4; // Max 4 for card suits
 
     if (allMembers.length === 0 && allLeaders.length === 0) {
-      alert('참가자 목록을 입력해주세요.');
+      alert('모험가들의 이름을 적어주세요!');
       return;
     }
 
-    // Interaction Feedback
-    const btnContent = generateButton.querySelector('.btn-content');
-    const originalText = btnContent.textContent;
-    btnContent.textContent = 'GENERATING...';
     generateButton.disabled = true;
+    generateButton.querySelector('.btn-text').textContent = '주문을 외우는 중...';
 
-    // Simulate Processing Delay for effect
     setTimeout(() => {
       processGeneration(allMembers, allLeaders, numTeams);
-      
-      btnContent.textContent = originalText;
       generateButton.disabled = false;
-      
-      // Scroll and Celebrate
-      teamResultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      fireConfetti();
-    }, 800);
+      generateButton.querySelector('.btn-text').textContent = '운명의 카드 뽑기';
+      fireWonderlandConfetti();
+    }, 1000);
   };
 
   const processGeneration = (allMembers, allLeaders, numTeams) => {
     const nonLeaderMembers = allMembers.filter(member => !allLeaders.includes(member));
 
     const teams = Array.from({ length: numTeams }, (_, i) => ({
-      id: i + 1,
+      ...TEAM_THEMES[i % TEAM_THEMES.length],
       members: [],
       leaders: []
     }));
 
-    // Assign Leaders
-    let leaderIndex = 0;
+    // Distribute Leaders
     const shuffledLeaders = shuffleArray(allLeaders);
-    shuffledLeaders.forEach(leader => {
-      teams[leaderIndex % numTeams].leaders.push(leader);
-      leaderIndex++;
+    shuffledLeaders.forEach((leader, i) => {
+      teams[i % numTeams].leaders.push(leader);
     });
 
-    // Assign Members
+    // Distribute Members
     const shuffledMembers = shuffleArray(nonLeaderMembers);
-    let currentTeamIndex = Math.floor(Math.random() * numTeams); // Random start
+    let currentTeamIndex = Math.floor(Math.random() * numTeams);
     shuffledMembers.forEach(member => {
       teams[currentTeamIndex % numTeams].members.push(member);
       currentTeamIndex++;
     });
 
-    renderResults(teams);
+    renderTarotCards(teams);
   };
 
-  const renderResults = (teams) => {
+  const renderTarotCards = (teams) => {
     teamResultsDiv.innerHTML = '';
 
-    if (teams.length === 0) {
-      teamResultsDiv.innerHTML = '<div class="empty-state">결과가 없습니다.</div>';
-      return;
-    }
-
     teams.forEach((team, index) => {
-      const teamCard = document.createElement('div');
-      teamCard.className = 'team-card';
-      teamCard.style.animationDelay = `${index * 0.15}s`; // Staggered animation
+      const card = document.createElement('div');
+      card.className = `tarot-card ${team.class}`;
+      card.style.animationDelay = `${index * 0.2}s`;
 
-      const totalCount = team.leaders.length + team.members.length;
-
-      teamCard.innerHTML = `
-        <div class="card-header">
-          <h3>TEAM 0${team.id}</h3>
-          <span class="count-badge">${totalCount}명</span>
+      card.innerHTML = `
+        <div class="card-inner">
+          <div class="card-header">
+            <h3 class="team-title">${team.name}</h3>
+            <p class="team-subtitle">${team.symbol}</p>
+          </div>
+          <div class="card-illustration">
+            ${team.icon}
+          </div>
+          <div class="member-scroll">
+            <ul class="member-list">
+              ${team.leaders.map(l => `<li class="tarot-member is-leader">${l}</li>`).join('')}
+              ${team.members.map(m => `<li class="tarot-member">${m}</li>`).join('')}
+            </ul>
+          </div>
         </div>
-        <ul class="member-list">
-          ${team.leaders.map(leader => `
-            <li class="member-item is-leader">
-              <span class="leader-icon">👑</span>
-              <span class="name">${leader}</span>
-            </li>
-          `).join('')}
-          ${team.members.map(member => `
-            <li class="member-item">
-              <span class="name">${member}</span>
-            </li>
-          `).join('')}
-        </ul>
       `;
-      teamResultsDiv.appendChild(teamCard);
+      teamResultsDiv.appendChild(card);
     });
+
+    teamResultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Default Data
+  // Initial Data
   if (!membersTextarea.value) {
-    membersTextarea.value = `강호동\n유재석\n신동엽\n이경규\n김구라\n박명수\n정준하\n하하\n노홍철\n정형돈\n양세형\n조세호`;
+    membersTextarea.value = `앨리스\n모자장수\n흰 토끼\n체셔 고양이\n도마우스\n3월의 토끼\n애벌레\n하트 여왕\n하트 잭\n그리핀`;
   }
   if (!leadersTextarea.value) {
-    leadersTextarea.value = `유재석\n강호동`;
+    leadersTextarea.value = `앨리스\n모자장수\n하트 여왕`;
   }
 
   generateButton.addEventListener('click', generateTeams);

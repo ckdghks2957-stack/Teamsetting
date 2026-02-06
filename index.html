@@ -3,75 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Team Maker - Neon Edition</title>
+  <title>앨리스의 팀 메이커 - 동화 같은 팀 편성</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Noto+Serif+KR:wght@300;400;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <link href='/style.css' rel='stylesheet'>
 </head>
-<body>
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
-  <div class="backdrop"></div>
+<body class="storybook-theme">
+  <div class="fantasy-map-bg"></div>
+  <div class="overlay-texture"></div>
 
   <div class="container">
     <header>
-      <div class="logo-wrapper">
-        <h1 class="neon-text">TEAM MAKER</h1>
-        <span class="badge">PRO</span>
+      <div class="title-frame">
+        <h1 class="storybook-title">WONDERLAND</h1>
+        <h2 class="storybook-subtitle">TEAM MAKER</h2>
       </div>
-      <p class="subtitle">완벽한 팀을 위한 넥스트 레벨 솔루션</p>
+      <p class="intro-text">마법의 카드로 결정되는 당신의 운명적인 팀을 만나보세요.</p>
     </header>
 
     <main>
-      <section class="glass-panel settings-panel">
-        <div class="panel-header">
-          <span class="icon">⚙️</span>
-          <h2>SETTING</h2>
-        </div>
-        <div class="input-group">
-          <label for="numTeams">TEAMS</label>
-          <div class="input-wrapper">
-            <input type="number" id="numTeams" min="1" value="2">
-            <span class="unit">팀</span>
+      <div class="scroll-container">
+        <section class="parchment-panel settings-panel">
+          <div class="panel-ornament top"></div>
+          <div class="panel-content">
+            <label for="numTeams">왕국의 수 (팀 수)</label>
+            <div class="input-wrapper">
+              <input type="number" id="numTeams" min="1" max="4" value="4">
+            </div>
           </div>
-        </div>
-      </section>
+          <div class="panel-ornament bottom"></div>
+        </section>
 
-      <section class="glass-panel input-panel">
-        <div class="panel-header">
-          <span class="icon">👥</span>
-          <h2>MEMBERS</h2>
-        </div>
-        
-        <div class="input-grid">
-          <div class="input-section">
-            <label for="members">PARTICIPANTS <span class="hint">(이름을 한 줄에 하나씩)</span></label>
-            <textarea id="members" placeholder="홍길동&#10;김철수&#10;이영희"></textarea>
+        <section class="parchment-panel input-panel">
+          <div class="panel-ornament top"></div>
+          <div class="panel-content">
+            <div class="input-grid">
+              <div class="input-section">
+                <label for="members">모험가 목록 <span class="hint">(참가자)</span></label>
+                <textarea id="members" placeholder="홍길동&#10;심청이&#10;콩쥐"></textarea>
+              </div>
+              <div class="input-section">
+                <label for="leaders">왕국의 주인 <span class="hint">(팀장)</span></label>
+                <textarea id="leaders" placeholder="앨리스&#10;모자장수"></textarea>
+              </div>
+            </div>
           </div>
-
-          <div class="input-section">
-            <label for="leaders">LEADERS <span class="hint">(팀장 고정)</span></label>
-            <textarea id="leaders" placeholder="김팀장&#10;박팀장"></textarea>
-          </div>
-        </div>
-      </section>
+          <div class="panel-ornament bottom"></div>
+        </section>
+      </div>
 
       <div class="action-area">
-        <button id="generateTeams" class="btn-neon">
-          <span class="btn-content">START GENERATION</span>
-          <div class="btn-glow"></div>
+        <button id="generateTeams" class="btn-storybook">
+          <span class="btn-text">운명의 카드 뽑기</span>
+          <div class="btn-decoration"></div>
         </button>
       </div>
 
-      <section id="teamResults" class="results-grid">
-        <!-- Results will appear here -->
+      <section id="teamResults" class="tarot-display">
+        <!-- Tarot results will appear here -->
       </section>
     </main>
 
     <footer>
-      <p>DESIGNED FOR PERFORMANCE</p>
+      <p>Curiouser and Curiouser!</p>
     </footer>
   </div>
   <script type="module" src="/main.js"></script>
